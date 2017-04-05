@@ -1,5 +1,6 @@
 <head>
     <title>Survey</title>
+    <%= javascript_include_tag 'survey_script' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
@@ -14,23 +15,6 @@
                     <div class="form-group" id="submit">
                         <%= submit_tag("Finish", action: "addTextToUrl()", disabled: true, class: "btn btn-primary", id: "submitButton") %>
                     </div>
-                    <script type="text/javascript">
-                        var hidePassage = function() {
-                            console.log('hiding passage');
-                            $('#input').animate({ height: "15em" }, 250);
-                            $('#passage').animate({ height: "0" }, 250, "swing", function() {
-                                document.getElementById("passage").display = "none";
-                            });
-                        }
-                        $('#input').focus(function() {
-                            hidePassage();
-                        });
-                        setTimeout(hidePassage, 60 * 1000);
-                        var editingBegan = function() {
-                            document.getElementById("submitButton").disabled = false;
-                        };
-                        document.getElementById("input").addEventListener("keypress", editingBegan);
-                    </script>
                 <% end %>
             </div>
         </div>
