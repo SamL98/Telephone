@@ -1,0 +1,57 @@
+<head>
+    <title>Survey</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div id="form">
+                <%= form_tag("/start", method: "get", validates: true) do %>
+                    <%= hidden_field_tag("index", @passage.number + 1) %>
+                    <%= hidden_field_tag("place", @passage.derivation) %>
+                    <%= text_area_tag("passage", @passage.text, class: "form-control", id: "passage", disabled: true) %>
+                    <%= text_area_tag("input", "", class: "form-control", id: "input", placeholder: "Enter the above passage here") %>
+                    <div class="form-group" id="submit">
+                        <%= submit_tag("Finish", action: "addTextToUrl()", disabled: true, class: "btn btn-primary", id: "submitButton") %>
+                    </div>
+                    <script type="text/javascript">
+                        var hidePassage = function() {
+                            console.log('hiding passage');
+                            $('#input').animate({ height: "15em" }, 250);
+                            $('#passage').animate({ height: "0" }, 250, "swing", function() {
+                                document.getElementById("passage").display = "none";
+                            });
+                        }
+                        $('#input').focus(function() {
+                            hidePassage();
+                        });
+                        setTimeout(hidePassage, 60 * 1000);
+                        var editingBegan = function() {
+                            document.getElementById("submitButton").disabled = false;
+                        };
+                        document.getElementById("input").addEventListener("keypress", editingBegan);
+                    </script>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+#submit {
+	float: right;
+}
+#submitButton {
+	background-color: #339966;
+	color: #FFF;
+}
+#passage {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 25em;
+}
+#input {
+    height: 3em;
+    margin-bottom: 15px;
+}
+</style>

@@ -1,0 +1,26 @@
+<head>
+    <title>Survey</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <%= form_tag("/start", method: "get", validates: true) do %>
+        <%= hidden_field_tag("place", @place - 1) %>
+        <%= hidden_field_tag("index", 0) %>
+        <%= submit_tag("Start", class: "btn btn-primary", id: "startBtn") %>
+    <% end %>
+</body>
+
+<style>
+#startBtn {
+    width: 100px;
+    height: 60px;
+    font-size: 22.5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -50px;
+    background-color: #339966;
+    color: #FFF;
+}
+</style>

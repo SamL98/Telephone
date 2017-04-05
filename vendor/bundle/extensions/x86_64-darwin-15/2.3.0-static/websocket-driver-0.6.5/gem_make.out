@@ -1,0 +1,15 @@
+current directory: /Users/SamLerner/Documents/Telephone/Telephone/vendor/bundle/gems/websocket-driver-0.6.5/ext/websocket-driver
+/Users/SamLerner/.rbenv/versions/2.3.1/bin/ruby -r ./siteconf20170328-2824-159j6yl.rb extconf.rb
+creating Makefile
+
+current directory: /Users/SamLerner/Documents/Telephone/Telephone/vendor/bundle/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/SamLerner/Documents/Telephone/Telephone/vendor/bundle/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/SamLerner/Documents/Telephone/Telephone/vendor/bundle/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20170328-2824-yi7luy
