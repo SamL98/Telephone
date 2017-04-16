@@ -13,15 +13,17 @@
 ActiveRecord::Schema.define(version: 20170402000614) do
 
   create_table "chains", force: :cascade do |t|
-    t.integer  "identifier"
+    t.string   "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "passages", force: :cascade do |t|
+    t.integer  "chain_id"
     t.integer  "number"
     t.string   "text"
     t.integer  "derivation"
+    t.integer  "time_spent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

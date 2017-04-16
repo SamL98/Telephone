@@ -3,11 +3,11 @@ class TelephoneController < ApplicationController
   end
 
   def survey
-    new_params = user_params()
-    if !(User.pluck(:name).include? new_params[:name])
-      User.new(new_params).save
-    end
-    @place = new_params[:place]
+    chain = Chain.where('identifier = ?', params[:chain].to_s).first
+    chain.users.create!(user_params())
+    chain.save!
+    @place = params[:place].to_i
+    @chain = params[:chain].to_s
   end
 
   def start_survey
@@ -22,7 +22,7 @@ class TelephoneController < ApplicationController
     end
 
     if input != ""
-      Passage.new(number: number, text: input, derivation: place + 1).save
+      Passage.new(number: number - 1, text: input, derivation: place + 1).save
     end
 
     @passage = Passage.where("number = ? AND derivation = ?", number, place).first
