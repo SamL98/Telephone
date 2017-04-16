@@ -10,10 +10,12 @@
                 <%= form_tag("/start", method: "get", validates: true) do %>
                     <%= hidden_field_tag("index", @passage.number + 1) %>
                     <%= hidden_field_tag("place", @passage.derivation) %>
+                    <%= hidden_field_tag("time_spent", 0, id: "timeIn")%>
+                    <%= hidden_field_tag("chain", @chain) %>
                     <%= text_area_tag("passage", @passage.text, class: "form-control", id: "passage", disabled: true) %>
                     <%= text_area_tag("input", "", class: "form-control", id: "input", placeholder: "Enter the above passage here") %>
                     <div class="form-group" id="submit">
-                        <%= submit_tag("Finish", action: "addTextToUrl()", disabled: true, class: "btn btn-primary", id: "submitButton") %>
+                        <%= submit_tag("Finish", disabled: true, class: "btn btn-primary", id: "submitButton") %>
                     </div>
                 <% end %>
             </div>
@@ -29,13 +31,15 @@
 	background-color: #339966;
 	color: #FFF;
 }
-#passage {
+#passage, #input {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+#passage {
     height: 25em;
 }
 #input {
-    height: 3em;
-    margin-bottom: 15px;
+    display: none;
+    height: 0em;
 }
 </style>

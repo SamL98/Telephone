@@ -12,6 +12,7 @@ texts = [
 ]
 
 Chain.destroy_all
+Passage.destroy_all
 
 for j in 1...31 do
     Chain.new(identifier: 'M' + j.to_s).save!

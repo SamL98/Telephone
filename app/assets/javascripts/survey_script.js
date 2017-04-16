@@ -1,17 +1,26 @@
 $(document).on("ready", function() {
+    var firstEditOccurred = false;
+    var start, end = Date.now();
     var hidePassage = function() {
-        console.log('hiding passage');
-        $('#input').animate({ height: "15em" }, 250);
-        $('#passage').animate({ height: "0" }, 250, "swing", function() {
-            document.getElementById("passage").display = "none";
+        var input = $('#input');
+        input.animate({ height: "15em" }, 250, "swing", function() {
+            input.show();
+        });
+        var passage = $('#passage');
+        passage.animate({ height: "0em" }, 250, "swing", function() {
+            passage.hide();
         });
     }
-    $('#input').focus(function() {
-        hidePassage();
-    });
-    setTimeout(hidePassage, 60 * 1000);
-    var editingBegan = function() {
+    setTimeout(hidePassage, 10 * 1000);
+    var editingOccurred = function() {
+        if (!firstEditOccurred) {
+            start = Date.now();
+            firstEditOccurred = true;
+        } else {
+            end = Date.now();
+        }
+        document.getElementById("timeIn").value = end - start;
         document.getElementById("submitButton").disabled = false;
     };
-    document.getElementById("input").addEventListener("keypress", editingBegan);
+    document.getElementById("input").addEventListener("keypress", editingOccurred);
 });

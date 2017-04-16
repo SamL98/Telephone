@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170402000614) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer  "chain_id"
     t.integer  "place"
     t.string   "name"
     t.datetime "created_at", null: false
