@@ -31,8 +31,23 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.save
   end
 
-  test "should save with formatted name and place" do
+  test "should not save without chain id" do
     user = User.new(name: "user1", place: 0)
-    assert user.save
+    assert_not user.save
+  end
+
+  test "should not save with negative chain id" do
+    user = User.new(chain_id: -1, name: "user1", place: 0)
+    assert_not user.save
+  end
+
+  test "should not save with non-integer chain id" do
+    user = User.new(chain_id: 1.5, name: "user1", place: 0)
+    assert_not user.save
+  end
+
+  test "should save with formatted name and place" do
+    user = User.new(chain_id: 980190962, name: "user1", place: 0)
+    assert user.save!
   end
 end

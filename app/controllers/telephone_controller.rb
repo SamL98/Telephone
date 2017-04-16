@@ -6,8 +6,10 @@ class TelephoneController < ApplicationController
     chain_id = params[:chain].to_s
     chain = Chain.where('identifier = ?', chain_id).first
     params[:chain_id] = chain.id
+
     chain.users.create!(user_params())
     chain.save!
+
     @place = params[:place].to_i
     @chain = chain_id
   end
@@ -35,7 +37,7 @@ class TelephoneController < ApplicationController
       chain.save!
     end
 
-    @passage = passages.where("number = ? AND derivation = ?", number, place).first
+    @passage = passages.where("number = ? AND derivation = ?", number, place).last
     if !@passage
       flash.now[:alert] = "There is no passage with your chosen parameters"
       redirect_to "/"
