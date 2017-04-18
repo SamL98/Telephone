@@ -6,24 +6,31 @@ class TelephoneControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get start survey" do
-    get '/home'
+  test "should not start survey without chain id" do
+    get '/home', params: { name: "user1", place: 1 }
+    assert_response :failure
+  end
+
+  test "should not start survey without username" do
+    get '/home', params: { chain: 'M1', place: 1 }
+    assert_response :failure
+  end
+
+  test "should not start survey without place" do
+    get '/home', params: { chain: 'M1', name: 'user1' }
+    assert_response :failure
+  end
+
+  test "should start survey with proper params" do
+    get '/home', params: { chain: 'M1', name: 'user1', place: 1 }
     assert_response :success
   end
 
-  test "should create new user with unique id" do
+  test "home should create new user" do
     init_count = User.count
-    get '/home', params: { name: "sdlfkjsdlfksjdf", place: 1 }
+    get '/home', params: { name: "user1", place: 1, chain: 'M1' }
     final_count = User.count
     assert_equal final_count = init_count + 1
-    assert_response :success
-  end
-
-  test "should not create new user with not unique id" do
-    init_count = User.count
-    get '/home', params: { name: "user1", place: 1 }
-    final_count = User.count
-    assert_equal final_count = init_count
     assert_response :success
   end
 
