@@ -13,9 +13,9 @@
                     <%= hidden_field_tag("time_spent", 0, id: "timeIn")%>
                     <%= hidden_field_tag("chain", @chain) %>
                     <%= text_area_tag("passage", @passage.text, class: "form-control", id: "passage", disabled: true) %>
-                    <%= text_area_tag("input", "", class: "form-control", id: "input", placeholder: "Enter the above passage here") %>
+                    <%= text_area_tag("input", "", class: "form-control", id: "input", placeholder: "Type the news story here") %>
                     <div class="form-group" id="submit">
-                        <%= submit_tag("Finish", disabled: true, class: "btn btn-primary", id: "submitButton") %>
+                        <%= submit_tag("Next", disabled: true, class: "btn btn-primary", id: "submitButton") %>
                     </div>
                 <% end %>
             </div>
@@ -37,9 +37,12 @@
 }
 #passage {
     height: 25em;
+    font-size: 300%;
+    color: black;
 }
 #input {
     display: none;
     height: 0em;
+    font-size: 150%;
 }
 </style>
