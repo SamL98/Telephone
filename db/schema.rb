@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170402000614) do
 
   create_table "passages", force: :cascade do |t|
     t.integer  "chain_id"
+    t.string   "passage_id"
     t.integer  "number"
     t.string   "text"
     t.integer  "derivation"

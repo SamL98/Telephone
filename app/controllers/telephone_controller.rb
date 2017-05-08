@@ -17,27 +17,30 @@ class TelephoneController < ApplicationController
   def start_survey
     params = survey_params()
 
-    place = params[:place]
-    number = params[:number]
-    time = params[:time]
-    input = params[:input]
-    @chain = params[:chain_id]
+    indeces = [0, 1, 2, 3, 4, 5]
+    visited = params[:visited].split(',').map(&:to_i)
+    indeces.delete_if { |x| visited.include? x }
+    indeces.shuffle!
 
+    @index = indeces.first
+    @visited = params[:visited] + ',' + @index.to_s
+
+    @chain = params[:chain_id]
     chain = Chain.where("identifier = ?", @chain).first
     passages = chain.passages
 
-    if number >= passages.where("derivation = ?", place).count
+    if params[:input] != "" && params[:time] > 0
+      passages.create!(number: params[:number], passage_id: params[:pid], text: params[:input], derivation: params[:place] + 1, time_spent: params[:time])
+      chain.save!
+    end
+
+    if indeces.count == 0
       puts "number is invalid"
       redirect_to "/finish"
       return
     end
 
-    if input != "" && time > 0
-      passages.create!(number: number - 1, text: input, derivation: place + 1, time_spent: time)
-      chain.save!
-    end
-
-    @passage = passages.where("number = ? AND derivation = ?", number, place).last
+    @passage = passages.where("number = ? AND derivation = ?", @index, params[:place]).last
     if !@passage
       flash.now[:alert] = "There is no passage with your chosen parameters"
       redirect_to "/"
@@ -53,8 +56,9 @@ class TelephoneController < ApplicationController
   end
 
   def survey_params
-    { input: params[:input].to_s, number: params[:index].to_i, 
-    place: params[:place].to_i, chain_id: params[:chain].to_s, 
-    time: params[:time_spent].to_i }
+    { input: params[:input].to_s, number: params[:index].to_i,
+    place: params[:place].to_i, chain_id: params[:chain].to_s,
+    time: params[:time_spent].to_i, visited: params[:visited].to_s,
+    pid: params[:pid].to_s }
   end
 end
