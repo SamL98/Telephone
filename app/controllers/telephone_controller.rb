@@ -29,7 +29,7 @@ class TelephoneController < ApplicationController
     chain = Chain.where("identifier = ?", @chain).first
     passages = chain.passages
 
-    if params[:input] != "" && params[:time] > 0
+    if params[:input] != ""
       passages.create!(number: params[:number], passage_id: params[:pid], text: params[:input], derivation: params[:place] + 1, time_spent: params[:time])
       chain.save!
     end
