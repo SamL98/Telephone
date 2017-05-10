@@ -11,7 +11,7 @@ $(document).on("ready", function() {
             passage.hide();
         });
     }
-    setTimeout(hidePassage, 1 * 1000);
+    setTimeout(hidePassage, 30 * 1000);
     var editingOccurred = function() {
         if (!firstEditOccurred) {
             start = Date.now();
