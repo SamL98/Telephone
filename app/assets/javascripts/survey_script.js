@@ -3,13 +3,15 @@ $(document).on("ready", function() {
     var start, end = Date.now();
     var hidePassage = function() {
         var input = $('#input');
-        input.animate({ height: "15em" }, 250, "swing", function() {
+        input.animate({ height: "70vh" }, 250, "swing", function() {
             input.show();
         });
         var passage = $('#passage');
-        passage.animate({ height: "0em" }, 250, "swing", function() {
+        passage.animate({ height: "0vh" }, 250, "swing", function() {
             passage.hide();
         });
+        var submit = $('#submit');
+        submit.show();
     }
     setTimeout(hidePassage, 30 * 1000);
     var editingOccurred = function() {
