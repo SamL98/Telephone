@@ -55,13 +55,15 @@ class TelephoneController < ApplicationController
     $stdout = File.new('data.csv', 'w')
     Chain.all.each do |chain|
       chain.passages.all.each do |passage|
-        print chain.identifier + ','
-        print passage.passage_id + ','
-        print passage.number.to_s + ','
-        print passage.text + ','
-        print passage.derivation.to_s + ','
-        print passage.time_spent.to_s + ','
-        puts ''
+        if passage.derivation > 1
+          print chain.identifier + ','
+          print passage.passage_id + ','
+          print passage.number.to_s + ','
+          print passage.text + ','
+          print passage.derivation.to_s + ','
+          print passage.time_spent.to_s + ','
+          puts ''
+        end
       end
     end
     $stdout = original_out
