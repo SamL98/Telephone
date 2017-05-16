@@ -7,15 +7,16 @@ class TelephoneController < ApplicationController
     chain = Chain.where('identifier = ?', chain_id).first
     params[:chain_id] = chain.id
 
-    chain.users.create!(user_params())
+    chain.users.create!(user_params)
     chain.save!
 
+    @user = user_params[:name]
     @place = params[:place].to_i
     @chain = chain_id
   end
 
   def start_survey
-    params = survey_params()
+    params = survey_params
 
     indeces = [0, 1, 2, 3, 4, 5]
     visited = params[:visited].split(',').map(&:to_i)
@@ -24,13 +25,14 @@ class TelephoneController < ApplicationController
 
     @index = indeces.first
     @visited = params[:visited] + ',' + @index.to_s
+    @user = params[:user]
 
     @chain = params[:chain_id]
-    chain = Chain.where("identifier = ?", @chain).first
+    chain = Chain.where('identifier = ?', @chain).first
     passages = chain.passages
 
-    if params[:input] != ""
-      passages.create!(number: params[:number], passage_id: params[:pid], text: params[:input], derivation: params[:place] + 1, time_spent: params[:time])
+    if params[:input] != ''
+      passages.create!(user: @user, number: params[:number], passage_id: params[:pid], text: params[:input], derivation: params[:place] + 1, time_spent: params[:time])
       chain.save!
     end
 
@@ -53,19 +55,21 @@ class TelephoneController < ApplicationController
   def format_data
     original_out = $stdout.clone
     $stdout = File.new('data.csv', 'w')
+    text = ''
     Chain.all.each do |chain|
       chain.passages.all.each do |passage|
         if passage.derivation > 1
-          print chain.identifier + ','
-          print passage.passage_id + ','
-          print passage.number.to_s + ','
-          print passage.text + ','
-          print passage.derivation.to_s + ','
-          print passage.time_spent.to_s + ','
-          puts ''
+          text += chain.identifier + ','
+          text += passage.passage_id + ','
+          text += passage.number.to_s + ','
+          text += passage.text + ','
+          text += passage.derivation.to_s + ','
+          text += passage.time_spent.to_s + ','
+          text += '\n'
         end
       end
     end
+    @text = text
     $stdout = original_out
   end
 
@@ -79,6 +83,6 @@ class TelephoneController < ApplicationController
     { input: params[:input].to_s, number: params[:index].to_i,
       place: params[:place].to_i, chain_id: params[:chain].to_s,
       time: params[:time_spent].to_i, visited: params[:visited].to_s,
-      pid: params[:pid].to_s }
+      pid: params[:pid].to_s, user: params[:user].to_s }
   end
 end

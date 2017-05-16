@@ -8,6 +8,7 @@
         <%= hidden_field_tag("index", 0) %>
         <%= hidden_field_tag("visited", "-1") %>
         <%= hidden_field_tag("chain", @chain) %>
+        <%= hidden_field_tag("user", @user) %>
         <h2>On the next few pages, you will be shown a series of news articles. A news article will be shown to you for 30 seconds. Please read it during this time. After 30 seconds, it will be replaced by an empty box. Please type, from memory, the news story in the empty box. When you are done typing, please press "Next"</h2>
         <%= submit_tag("Start", class: "btn btn-primary", id: "startBtn") %>
     <% end %>

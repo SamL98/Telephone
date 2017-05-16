@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170402000614) do
   end
 
   create_table "passages", force: :cascade do |t|
+    t.string   "user"
     t.integer  "chain_id"
     t.string   "passage_id"
     t.integer  "number"

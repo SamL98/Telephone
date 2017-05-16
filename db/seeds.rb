@@ -26,16 +26,16 @@ File.readlines(Rails.root.join('counterbalancing/counterbalancing List-Table 1.c
   terms = line.parse_csv
   j = 0
   sets[terms[1].to_sym].each do |article|
-    l_chain.passages.create!(chain_id: l_chain.id, passage_id: article[0], number: j, text: article[1], derivation: 1, time_spent: 0)
+    l_chain.passages.create!(user: '', chain_id: l_chain.id, passage_id: article[0], number: j, text: article[1], derivation: 1, time_spent: 0)
     j += 1
   end
   sets[terms[2].to_sym].each do |article|
-    l_chain.passages.create!(chain_id: l_chain.id, passage_id: article[0], number: j, text: article[1], derivation: 1, time_spent: 0)
+    l_chain.passages.create!(user: '', chain_id: l_chain.id, passage_id: article[0], number: j, text: article[1], derivation: 1, time_spent: 0)
     j += 1
   end
   j = 0
   sets[terms[4].to_sym].each do |article|
-    m_chain.passages.create!(chain_id: m_chain.id, passage_id: article[0], number: j, text: article[1], derivation: 1, time_spent: 0)
+    m_chain.passages.create!(user: '', chain_id: m_chain.id, passage_id: article[0], number: j, text: article[1], derivation: 1, time_spent: 0)
     j += 1
   end
   sets[terms[5].to_sym].each do |article|

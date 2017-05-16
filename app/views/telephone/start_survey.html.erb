@@ -14,6 +14,7 @@
                     <%= hidden_field_tag("time_spent", 0, id: "timeIn") %>
                     <%= hidden_field_tag("chain", @chain) %>
                     <%= hidden_field_tag("pid", @passage.passage_id) %>
+                    <%= hidden_field_tag("user", @user) %>
                     <%= text_area_tag("passage", @passage.text, class: "form-control", id: "passage", disabled: true) %>
                     <%= text_area_tag("input", "", class: "form-control", id: "input", placeholder: "Type the news story here") %>
                     <div class="form-group" id="submit">
