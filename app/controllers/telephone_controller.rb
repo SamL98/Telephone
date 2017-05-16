@@ -59,13 +59,14 @@ class TelephoneController < ApplicationController
     Chain.all.each do |chain|
       chain.passages.all.each do |passage|
         if passage.derivation > 1
+          text += passage.user + ','
           text += chain.identifier + ','
           text += passage.passage_id + ','
           text += passage.number.to_s + ','
           text += passage.text + ','
           text += passage.derivation.to_s + ','
           text += passage.time_spent.to_s + ','
-          text += '\n'
+          text += "\n"
         end
       end
     end
