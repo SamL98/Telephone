@@ -52,25 +52,23 @@ class TelephoneController < ApplicationController
   def finish_survey
   end
 
+  require 'csv'
+
   def format_data
     original_out = $stdout.clone
     $stdout = File.new('data.csv', 'w')
-    text = ''
+    texts = []
     Chain.all.each do |chain|
       chain.passages.all.each do |passage|
         if passage.derivation > 1
-          text += passage.user + ','
-          text += chain.identifier + ','
-          text += passage.passage_id + ','
-          text += passage.number.to_s + ','
-          text += passage.text + ','
-          text += passage.derivation.to_s + ','
-          text += passage.time_spent.to_s + ','
+          data = [passage.user, chain.identifier, passage.passage_id, passage.number, passage.text, passage.derivation, passage.time_spent]
+          text = data.to_csv
           text += "\n"
+          texts << text
         end
       end
     end
-    @text = text
+    @texts = texts
     $stdout = original_out
   end
 
