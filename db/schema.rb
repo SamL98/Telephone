@@ -10,30 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402000614) do
+ActiveRecord::Schema.define(version: 20180426190432) do
 
-  create_table "chains", force: :cascade do |t|
-    t.string   "identifier"
+  create_table "article_sets", force: :cascade do |t|
+    t.text     "ps"
+    t.integer  "pair"
+    t.integer  "derivation"
+    t.boolean  "is_lay"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "passages", force: :cascade do |t|
-    t.string   "user"
-    t.integer  "chain_id"
-    t.string   "passage_id"
-    t.integer  "number"
     t.string   "text"
-    t.integer  "derivation"
-    t.integer  "time_spent"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.integer  "chain_id"
-    t.integer  "place"
-    t.string   "name"
+    t.string   "user"
+    t.boolean  "is_lay"
+    t.integer  "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

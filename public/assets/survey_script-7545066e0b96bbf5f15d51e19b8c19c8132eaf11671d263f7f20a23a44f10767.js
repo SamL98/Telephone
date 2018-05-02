@@ -10,7 +10,7 @@ $(document).on("ready", function() {
         passage.animate({ height: "0vh" }, 250, "swing", function() {
             passage.hide();
         });
-        $('#nextButton').hide()
+        $('#edit').hide()
         var submit = $('#submit');
         submit.show();
     }

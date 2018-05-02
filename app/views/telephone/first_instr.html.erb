@@ -1,0 +1,39 @@
+<head>
+    <title>Survey</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <%= form_tag("/survey", method: "get", validates: true) do %>
+        <%= hidden_field_tag("place", @place) %>
+        <%= hidden_field_tag("index", @index) %>
+        <%= hidden_field_tag("pair", @pair) %>
+        <%= hidden_field_tag("input", "") %>
+        <%= hidden_field_tag("visited", @visited) %>
+        <%= hidden_field_tag("name", @user) %>
+        <%= hidden_field_tag("is_lay", @is_lay) %>
+        <%= hidden_field_tag("source", @source) %>
+        <%= hidden_field_tag("old_aset", @old_aset) %>
+        <h2>On the next page, you will be shown a news article. Please read it thoroughly. When you are finished reading, select "Done". You will then be presented with an empty box. Please type the article from memory in this box. When you are done typing, please press "Next"</h2>
+        <%= submit_tag("Start", class: "btn btn-primary", id: "startBtn") %>
+    <% end %>
+</body>
+
+<style>
+h2 {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 30px;
+}
+#startBtn {
+    width: 100px;
+    height: 60px;
+    font-size: 22.5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -50px;
+    background-color: #339966;
+    color: #FFF;
+}
+</style>
